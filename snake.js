@@ -1,28 +1,28 @@
-// Set up the canvas
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-var cellSize = 10;
-var canvasWidth = canvas.width / cellSize;
-var canvasHeight = canvas.height / cellSize;
+// Set up the canvas of the game
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+let cellSize = 10;
+let canvasWidth = canvas.width / cellSize;
+let canvasHeight = canvas.height / cellSize;
 
 // Set up the snake
-var snake = [];
+let snake = [];
 snake[0] = {
     x: Math.floor(canvasWidth / 2),
     y: Math.floor(canvasHeight / 2)
 };
-var dx = 1;
-var dy = 0;
+let dx = 1;
+let dy = 0;
 
 // Set up the food
-var food = {
+let food = {
     x: Math.floor(Math.random() * canvasWidth),
     y: Math.floor(Math.random() * canvasHeight)
 };
 
 // Set up the score and highscore
-var score = 0;
-var highscore = localStorage.getItem("highscore") || 0;
+let score = 0;
+let highscore = localStorage.getItem("highscore") || 0;
 document.getElementById("highscore").textContent = highscore;
 
 // Handle keyboard input
@@ -44,7 +44,7 @@ document.addEventListener("keydown", function(event) {
 
 // Move the snake and check for collisions
 function moveSnake() {
-    var head = {
+    let head = {
         x: snake[0].x + dx,
         y: snake[0].y + dy
     };
@@ -66,7 +66,7 @@ function moveSnake() {
         clearInterval(gameInterval);
         alert("Game over!");
     }
-    for (var i = 1; i < snake.length; i++) {
+    for (let i = 1; i < snake.length; i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) {
             clearInterval(gameInterval);
             alert("Game over!");
@@ -78,7 +78,7 @@ function moveSnake() {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#333";
-    for (var i = 0; i < snake.length; i++) {
+    for (let i = 0; i < snake.length; i++) {
         ctx.fillRect(snake[i].x * cellSize, snake[i].y * cellSize, cellSize, cellSize);
     }
     ctx.fillStyle = "#f00";
@@ -86,7 +86,7 @@ function draw() {
 }
 
 // Start the game loop
-var gameInterval = setInterval(function() {
+let gameInterval = setInterval(function() {
     moveSnake();
     draw();
 }, 100);
